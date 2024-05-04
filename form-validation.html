@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+
+    form div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      width: 100px;
+      margin-left: 35%;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="checkbox"]+label,
+    input[type="radio"]+label {
+      display: inline;
+      margin-right: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div>
+    <form action="HTML\Success.html">
+      <div>
+        <h1>COUNSELLING FORM</h1>
+      </div>
+      <div>
+        <label>Name</label>
+        <input type="text" id="name" autofocus>
+      </div>
+      <div>
+        <label>Age</label>
+        <input type="number" id="age">
+      </div>
+      <div>
+        <label>Gender</label>
+        <input type="radio" name="gen" id="male">
+        <label>Male</label>
+        <input type="radio" name="gen" id="female">
+        <label>Female</label>
+      </div>
+      <div>
+        <label>Phone Number</label>
+        <input type="number" id="phone">
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" id="email">
+      </div>
+      <div>
+        <label>Mark</label>
+        <input type="number" id="mark">
+      </div>
+      <div id="coll">
+        <label>College</label>
+        <div>
+          <input type="checkbox" id="KEC">
+          <label>KONGU ENGINEERING COLLEGE, ERODE</label><br>
+        </div>
+        <div>
+          <input type="checkbox" id="CIT">
+          <label>COIMBATORE COLLEGE OF TECHNOLOGY</label><br>
+        </div>
+        <div>
+          <input type="checkbox" id="SRM">
+          <label>SRM COLLEGE OF ENGINEERING, CHENNAI</label><br>
+        </div>
+        <div>
+          <label>Courses</label>
+          <input list="col" id="college" size="30">
+          <datalist id="col">
+            <option value="CSE"></option>
+            <option value="IT"></option>
+            <option value="EEE"></option>
+            <option value="ECE"></option>
+            <option value="AI & ML"></option>
+            <option value="AI & DS"></option>
+            <option value="Mechanical"></option>
+          </datalist>
+        </div>
+        <div>
+          <button type="submit" onclick="func()">Submit</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      function func() {
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let phone = document.getElementById("phone").value;
+        let email = document.getElementById("email").value;
+        let mark = document.getElementById("mark").value;
+        let phonecheck = /^\d{10}$/;
+        let emailcheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let fl = 0;
+
+        if (name == null || name == "")
+          alert("Please Enter your name !!");
+        else if (isNaN(age) || age < 15 || age > 60)
+          alert("Please Enter Valid age !!")
+        else if (!phone)
+          alert("Please Enter your phone number !!");
+        else if (!phonecheck.test(phone))
+          alert("Phone number must be a 10-digit number !!");
+        else if (!email || !emailcheck.test(email))
+          alert("Please Enter Valid Email !!")
+        else {
+          let college = document.getElementById("college").value.toLowerCase();
+
+          if (college === "CSE") {
+            if (mark < 550 || mark > 600)
+              fl = 1
+          }
+          else if (college === "IT") {
+            if (mark < 510 || mark > 600)
+              fl = 1
+          }
+          else if (college === "EEE") {
+            if (mark < 475 || mark > 600)
+              fl = 1
+          }
+          else if (college === "ECE") {
+            if (mark < 450 || mark > 600)
+              fl = 1
+          }
+          else if (college === "AI & ML") {
+            if (mark < 500 || mark > 600)
+              fl = 1
+          }
+          else if (college === "AI & DS") {
+            if (mark < 500 || mark > 600)
+              fl = 1
+          }
+          else if (college === "mechanical") {
+            if (mark < 300 || mark > 600)
+              fl = 1
+          }
+          if (fl != 0)
+            alert("Please select a valid course based on your mark !!");
+          else
+            alert("Form submitted successfully !!");
+
+
+        }
+      }
+    </script>
+
+</body>
+
+</html>
